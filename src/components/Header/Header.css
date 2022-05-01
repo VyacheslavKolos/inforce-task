@@ -1,0 +1,18 @@
+.header{
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: coral;
+    gap: 150px;
+    font-size: 25px;
+
+}
+.header a{
+    text-decoration: none;
+    color: #03ff00;
+}
+.header a[class='active']{
+    text-decoration: underline;
+    color: white;
+}
