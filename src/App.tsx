@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route, Routes} from "react-router-dom";
+import {Navigate,Route, Routes} from "react-router-dom";
 
 import {Layout, ProductsList} from "./components";
 
@@ -11,7 +11,11 @@ const App = () => {
                 <Route path={"/"} element={<Layout/>}>
 
                     <Route path={'/product-list'} element={<ProductsList/>}/>
-                    <Route path={'/addProduct '} element={<ProductsList/>}/>
+
+                    <Route
+                        path="/"
+                        element={<Navigate to="/product-list"  />}
+                    />
 
                 </Route>
             </Routes>
