@@ -5,17 +5,24 @@ import {productService} from "../../services";
 
 interface IProductState {
     products: IProduct[],
+    errors:object
 }
 
 const initialState: IProductState = {
-    products: []
+    products: [],
+    errors:[]
 }
 
 export const getAllProducts = createAsyncThunk(
     'productSlice/getAllProducts',
-    async (_, {dispatch}) => {
+    async (_, {dispatch,rejectWithValue}) => {
+        try {
         const {data} = await productService.getAll()
         dispatch(setProducts({products: data}))
+        }
+        catch (e:any){
+            return rejectWithValue(e.message);
+        }
     }
 )
 
@@ -50,7 +57,13 @@ export const productSlice = createSlice({
         deleteProduct: ((state, action) => {
             state.products.filter(product => product.id !== action.payload.id)
         })
+    },
+    extraReducers: {
+        [getAllProducts.rejected.toString()]: (state:any, action:PayloadAction<string>) => {
+            state.errors = action.payload
+        },
     }
+
 })
 
 const productReducer = productSlice.reducer;

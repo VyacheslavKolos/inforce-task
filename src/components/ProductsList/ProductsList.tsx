@@ -8,13 +8,13 @@ const ProductsList:FC = () => {
 
     const dispatch = useAppDispatch();
 
-    const {products} = useAppSelector(state => state.productReducer)
+    const {products,errors} = useAppSelector(state => state.productReducer)
 
     useEffect(() => {
         dispatch(getAllProducts())
     }, [])
+    console.log(errors);
 
-    
     return (
         <div>
             {products.map(product=><Product key={product.id} product={product}/>)}
